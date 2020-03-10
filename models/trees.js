@@ -104,4 +104,38 @@ async function registerTrees({
   return res.rowCount > 0 ? res.rows[0].species : null;
 }
 
-module.exports = { registerUser, loginUser, registerTrees };
+async function registerConfirmedTrees({
+  species,
+  longitude,
+  latitude,
+  planted,
+  date_planted
+}) {
+  const res = await query(
+    `
+  INSERT INTO tree_confirmation (
+    species,
+    longitude,
+    latitude,
+    planted,
+    date_planted
+      )
+      VALUES (
+          $1,
+          $2,
+          $3,
+          $4,
+          $5
+      ) RETURNING species
+  `,
+    [species, longitude, latitude, planted, date_planted]
+  );
+  return res.rowCount > 0 ? res.rows[0].species : null;
+}
+
+module.exports = {
+  registerUser,
+  loginUser,
+  registerTrees,
+  registerConfirmedTrees
+};
