@@ -1,14 +1,16 @@
+const { query } = require("../index");
+
 async function createTableTrees() {
-  const res2 = await query(`CREATE TABLE IF NOT EXISTS trees(
-        tree id SERIAL PRIMARY KEY,
-        species TEXT,
+  const res = await query(`CREATE TABLE IF NOT EXISTS trees(
+        tree_id SERIAL PRIMARY KEY,
+        species TEXT NOT NULL,
         longitude INTEGER,
         latitude INTEGER,
-        owner id TEXT,
+        owner_id SERIAL,
         info TEXT
         )
         `);
-  console.log(res2);
+  console.log(res);
 }
 
 createTableTrees();

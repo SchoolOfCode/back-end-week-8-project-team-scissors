@@ -1,14 +1,16 @@
+const { query } = require("../index");
+
 async function createTableConfirmation() {
-  const res3 = await query(`CREATE TABLE IF NOT EXISTS treeConfirmation(
-      tree id SERIAL PRIMARY KEY,
+  const res = await query(`CREATE TABLE IF NOT EXISTS tree_confirmation(
+      tree_id SERIAL PRIMARY KEY,
       species TEXT,
       longitude INTEGER,
       latitude INTEGER,
       planted BOOLEAN,
-      date planted DATE
+      date_planted DATE
       )
       `);
-  console.log(res3);
+  console.log(res);
 }
 
 createTableConfirmation();

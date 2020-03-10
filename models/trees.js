@@ -11,7 +11,7 @@ async function registerUser({ email, password }) {
   // write query string- insert user to db
   const response = await query(
     `
-  INSERT INTO users (
+  INSERT INTO planters (
       email,
       password
       )
@@ -31,7 +31,7 @@ async function registerUser({ email, password }) {
 }
 
 async function loginUser({ password, username }) {
-  const res = await query(`SELECT password FROM users WHERE email = $1`, [
+  const res = await query(`SELECT password FROM planters WHERE email = $1`, [
     username
   ]);
   console.log(res.rows[0]);
