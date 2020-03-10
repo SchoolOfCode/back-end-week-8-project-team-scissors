@@ -54,14 +54,14 @@ router.post("/logout", (req, res) => {
 });
 
 // // potentially delete
-router.get("/secret", (req, res) => {
-  if (res.signedCookies.email_address) {
-    return res.json({
-      success: true,
-      message: `logged in as ${res.signedCookies.email_address}`
-    });
-  }
-  return res.json({ success: false, message: `not logged in` });
-});
+// router.get("/secret", (req, res) => {
+//   if (res.signedCookies.email_address) {
+//     return res.json({
+//       success: true,
+//       message: `logged in as ${res.signedCookies.email_address}`
+//     });
+//   }
+//   return res.json({ success: false, message: `not logged in` });
+// });
 
 module.exports = router;
