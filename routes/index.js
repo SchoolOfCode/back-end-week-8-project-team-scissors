@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser } = require("../models/trees.js");
+const {
+  registerUser,
+  loginUser,
+  registerTrees
+} = require("../models/trees.js");
 
 router.post("/", async (req, res) => {
   const body = req.body;
@@ -32,10 +36,32 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/registerTree", async (req, res) => {
+  const body = req.body;
+  const species = await registerTrees(body);
+  if (species) {
+    return res.json({
+      payload: `species ${species} has been requested`
+    });
+  }
+  res.json({ success: false, message: "try again" });
+});
+
 // Make logout route
 router.post("/logout", (req, res) => {
   req.session.destroy();
   res.json({ success: true, message: "you are logged out" });
+});
+
+// // potentially delete
+router.get("/secret", (req, res) => {
+  if (res.signedCookies.email_address) {
+    return res.json({
+      success: true,
+      message: `logged in as ${res.signedCookies.email_address}`
+    });
+  }
+  return res.json({ success: false, message: `not logged in` });
 });
 
 module.exports = router;
