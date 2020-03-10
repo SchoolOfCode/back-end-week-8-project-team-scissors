@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const { registerUser, loginUser } = require("../models/trees.js");
 
 router.post("/", async (req, res) => {
   const body = req.body;
-  const email = await registerUser(body);
-  if (email) {
-    return res.json({ payload: `user ${email} has been created` });
+  const email_address = await registerUser(body);
+  if (email_address) {
+    return res.json({ payload: `user ${email_address} has been created` });
   }
   res.json({ success: false, message: "try again" });
 });
@@ -13,20 +14,20 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { body } = req;
   const success = await loginUser({
-    email: body.email,
+    email_address: body.email_address,
     password: body.password
   });
   if (success) {
     req.session.isLoggedIn = true;
-    req.session.email = body.email;
+    req.session.email_address = body.email_address;
     return res.json({
       success: true,
-      message: `${body.email} is logged in`
+      message: `${body.email_address} is logged in`
     });
   } else {
     return res.json({
       success: false,
-      message: `${body.email} is not logged in`
+      message: `${body.email_address} is not logged in`
     });
   }
 });

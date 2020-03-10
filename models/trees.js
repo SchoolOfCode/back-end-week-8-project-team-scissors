@@ -2,9 +2,9 @@ const { query } = require("../db");
 
 const bcrypt = require("bcryptjs");
 
-async function registerUser({ email, password }) {
+async function registerUser({ email_address, password }) {
   //take in data
-  console.log({ email, password });
+  console.log({ email_address, password });
   const hash = await bcrypt.hash(password, 10);
   // save data in database
   // make sure we have right data
@@ -12,17 +12,17 @@ async function registerUser({ email, password }) {
   const response = await query(
     `
   INSERT INTO planters (
-      email,
+      email_address,
       password
       )
-      VALUES (
+      VALUES ( 
           $1,
           $2
-      ) RETURNING email
+      ) RETURNING email_address
   `,
-    [email, hash]
+    [email_address, hash]
   );
-  return response.rowCount > 0 ? response.rows[0].email : null;
+  return response.rowCount > 0 ? response.rows[0].email_address : null;
 
   // give query the values it needs
   // save response in a variable
@@ -30,9 +30,9 @@ async function registerUser({ email, password }) {
   // return successful response
 }
 
-async function loginUser({ password, username }) {
+async function loginUser({ email_address, password }) {
   const res = await query(`SELECT password FROM planters WHERE email = $1`, [
-    username
+    email_address
   ]);
   console.log(res.rows[0]);
   const hash = res.rows[0].password;
