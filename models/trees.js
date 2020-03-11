@@ -8,8 +8,7 @@ async function registerUser({
   password,
   organisation_name,
   email_address,
-  phone_number,
-  info
+  phone_number
 }) {
   //take in data
   console.log({
@@ -28,19 +27,14 @@ async function registerUser({
         password,
         organisation_name,
         email_address,
-        phone_number,
-        info
-      
-      )
+        phone_number)
       VALUES ( 
           $1,
           $2,
           $3,
           $4,
           $5,
-          $6,
-          $7
-      ) RETURNING email_address
+          $6) RETURNING email_address
   `,
     [
       first_name,
@@ -48,8 +42,7 @@ async function registerUser({
       hash,
       organisation_name,
       email_address,
-      phone_number,
-      info
+      phone_number
     ]
   );
   return response.rowCount > 0 ? response.rows[0].email_address : null;

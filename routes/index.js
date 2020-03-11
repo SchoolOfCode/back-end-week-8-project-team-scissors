@@ -64,7 +64,7 @@ router.post("/logout", (req, res) => {
   res.json({ success: true, message: "you are logged out" });
 });
 
-// // potentially delete
+// potentially delete
 // router.get("/secret", (req, res) => {
 //   if (res.signedCookies.email_address) {
 //     return res.json({
