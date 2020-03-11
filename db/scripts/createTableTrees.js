@@ -8,7 +8,9 @@ async function createTableTrees() {
         longitude DECIMAL(6,4),
         latitude DECIMAL (5,4),
         owner_id INTEGER,
-        info TEXT
+        info TEXT,
+        planted BOOLEAN,
+        date_planted DATE
         )
         `);
   console.log(res);

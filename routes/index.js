@@ -3,8 +3,7 @@ const router = express.Router();
 const {
   registerUser,
   loginUser,
-  registerTrees,
-  registerConfirmedTrees
+  registerTrees
 } = require("../models/trees.js");
 
 router.post("/", async (req, res) => {
@@ -48,16 +47,16 @@ router.post("/registerTree", async (req, res) => {
   res.json({ success: false, message: "try again" });
 });
 
-router.post("/registerConfirmedTree", async (req, res) => {
-  const body = req.body;
-  const species = await registerConfirmedTrees(body);
-  if (species) {
-    return res.json({
-      payload: `species ${species} has been planted`
-    });
-  }
-  res.json({ success: false, message: "try again" });
-});
+// router.post("/registerConfirmedTree", async (req, res) => {
+//   const body = req.body;
+//   const species = await registerConfirmedTrees(body);
+//   if (species) {
+//     return res.json({
+//       payload: `species ${species} has been planted`
+//     });
+//   }
+//   res.json({ success: false, message: "try again" });
+// });
 
 // Make logout route
 router.post("/logout", (req, res) => {

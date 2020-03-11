@@ -6,8 +6,7 @@ async function createTableConfirmation() {
       species TEXT,
       longitude DECIMAL(6,4),
       latitude DECIMAL(5,4),
-      planted BOOLEAN,
-      date_planted DATE
+      
       )
       `);
   console.log(res);
