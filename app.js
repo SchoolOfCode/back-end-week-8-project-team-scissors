@@ -1,12 +1,15 @@
 const express = require("express");
 const PORT = 5000;
 const app = express();
+const cors = require("cors");
 const pgSession = require("./middleware/pgsession");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 //const logger = require("morgan");
 
 app.use(cookieParser("secret"));
+
+app.use(cors());
 
 app.use(pgSession);
 

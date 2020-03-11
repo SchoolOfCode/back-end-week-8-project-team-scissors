@@ -8,8 +8,7 @@ async function createTable() {
         password TEXT,
         organisation_name TEXT,
         email_address TEXT,
-        phone_number INTEGER,
-        info TEXT
+        phone_number INTEGER
     )
     `);
   console.log(res);
